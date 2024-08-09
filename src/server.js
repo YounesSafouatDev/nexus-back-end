@@ -7,7 +7,6 @@ const cors = require('cors');
 
 // Load environment variables from .env file
 dotenv.config();
-
 const connectDB = require('./config/dataBase');
 const authRoutes = require('./api/v1/routes/auth');
 const postRoutes = require('./api/v1/routes/post');
@@ -23,16 +22,18 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
-// Use CORS to allow cross-origin requests
-app.use(cors({
-    origin: ['https://nexusrina.netlify.app'], // Add your front-end domain here
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-    credentials: true // Allow credentials (cookies, authorization headers, etc.)
-}));
-
 // Use body-parser to parse request bodies
 app.use(bodyParser.json());
+app.use(cors({
+    origin: 'https://nexusrina.netlify.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Handle preflight requests
+app.options('*', cors()); // Handle all OPTIONS requests
 
 // Mount routes
 app.use('/auth', authRoutes);
