@@ -8,7 +8,7 @@ dotenv.config();
 
 const connectDB = async () => {
     try {
-        const dbUri = "mongodb+srv://rinalinkDev:rinalinkdev@cluster0.pypdtdf.mongodb.net/nexus";
+        const dbUri = process.env.MONGO_URI;
         if (!dbUri) {
             throw new Error('MONGO_URI not defined in environment variables');
         }
