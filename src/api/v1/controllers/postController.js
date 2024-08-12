@@ -3,6 +3,10 @@ const User = require('../models/User');
 
 // Controller to create a new post
 exports.createPost = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://nexusrina.netlify.app');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
     try {
         const { companyName, email, phone, phoneCountry, keywords, description, image, postType } = req.body;
 
