@@ -25,11 +25,12 @@ if (process.env.NODE_ENV === 'development') {
 // Use body-parser to parse request bodies
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://nexusrina.netlify.app',
+    origin: ['https://nexusrina.netlify.app', 'http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Handle preflight requests
